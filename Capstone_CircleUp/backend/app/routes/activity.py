@@ -67,26 +67,13 @@ def create_activity(
     return new_activity
 
 
-@router.get(
-    "",
-    response_model=List[ActivityResponse]
-)
-def get_all_activities(
-        db: Session = Depends(get_db)
-):
-    activities = (
-        db.query(Activity)
-        .all()
-    )
-
-    return activities
-
 
 @router.get(
     "",
     response_model=list[ActivityResponse]
 )
 def get_all_activities(
+        title: Optional[str] = None,
         category: Optional[str] = None,
         location: Optional[str] = None,
         activity_date: Optional[date] = None,
@@ -96,6 +83,11 @@ def get_all_activities(
         Activity.status == "OPEN"
     )
 
+    if title:
+        query = query.filter(
+            Activity.title.ilike(f"%{title}%")
+        )
+
     if category:
         query = query.filter(
             Activity.category == category
@@ -103,7 +95,7 @@ def get_all_activities(
 
     if location:
         query = query.filter(
-            Activity.location == location
+            Activity.location.ilike(f"%{location}%")
         )
 
     if activity_date:
@@ -111,7 +103,35 @@ def get_all_activities(
             Activity.activity_date == activity_date
         )
 
+    query = query.order_by(
+        Activity.activity_date.asc(),
+        Activity.activity_time.asc()
+    )
+
     return query.all()
+
+
+@router.get(
+    "/{activity_id}",
+    response_model=ActivityResponse
+)
+def get_activity(
+        activity_id: int,
+        db: Session = Depends(get_db)
+):
+    activity = (
+        db.query(Activity)
+        .filter(Activity.id == activity_id)
+        .first()
+    )
+
+    if activity is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Activity not found"
+        )
+
+    return activity
 
 
 @router.put(
