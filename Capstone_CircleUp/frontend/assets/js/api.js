@@ -67,6 +67,10 @@ async function apiFetch(endpoint, options = {}) {
 // AUTHENTICATION APIs
 // ==========================================
 
+export function isAuthenticated() {
+    return !!localStorage.getItem('circleup_jwt');
+}
+
 export async function login(email, password) {
     // FastAPI's OAuth2PasswordRequestForm expects x-www-form-urlencoded
     const formData = new URLSearchParams();
@@ -109,4 +113,92 @@ export async function updateProfile(profileData) {
         method: 'PUT',
         body: JSON.stringify(profileData)
     });
+}
+
+export async function getCreatedActivities() {
+    return await apiFetch('/users/me/activities/created', { method: 'GET' });
+}
+
+export async function getJoinedActivities() {
+    return await apiFetch('/users/me/activities/joined', { method: 'GET' });
+}
+
+export async function getPendingRequests() {
+    return await apiFetch('/users/me/participation/pending', { method: 'GET' });
+}
+
+// ==========================================
+// ACTIVITY APIs
+// ==========================================
+
+export async function createActivity(activityData) {
+    return await apiFetch('/activities', {
+        method: 'POST',
+        body: JSON.stringify(activityData)
+    });
+}
+
+export async function browseActivities(params = {}) {
+    const filteredParams = Object.fromEntries(Object.entries(params).filter(([_, v]) => v != null && v !== ''));
+    const query = new URLSearchParams(filteredParams).toString();
+    const url = query ? `/activities?${query}` : '/activities';
+    return await apiFetch(url, {
+        method: 'GET'
+    });
+}
+
+export async function getActivityDetails(activityId) {
+    return await apiFetch(`/activities/${activityId}`, {
+        method: 'GET'
+    });
+}
+
+export async function updateActivity(activityId, data) {
+    return await apiFetch(`/activities/${activityId}`, { method: 'PUT', body: JSON.stringify(data) });
+}
+
+export async function cancelActivity(activityId) {
+    return await apiFetch(`/activities/${activityId}/cancel`, { method: 'PUT' });
+}
+
+export async function getOrganizerContact(activityId) {
+    return await apiFetch(`/activities/${activityId}/organizer-contact`, { method: 'GET' });
+}
+
+export async function getActivityParticipants(activityId) {
+    return await apiFetch(`/activities/${activityId}/participants`, { method: 'GET' });
+}
+
+export async function joinActivity(activityId) {
+    return await apiFetch(`/participation/activities/${activityId}/request`, {
+        method: 'POST'
+    });
+}
+
+// ==========================================
+// PARTICIPANT MANAGEMENT APIs
+// ==========================================
+
+export async function getActivityRequests(activityId) {
+    return await apiFetch(`/participation/activities/${activityId}/requests`, { method: 'GET' });
+}
+
+export async function approveParticipant(requestId) {
+    return await apiFetch(`/participation/requests/${requestId}/approve`, {
+        method: 'PUT'
+    });
+}
+
+export async function rejectParticipant(requestId) {
+    return await apiFetch(`/participation/requests/${requestId}/reject`, {
+        method: 'PUT'
+    });
+}
+
+export async function withdrawRequest(requestId) {
+    return await apiFetch(`/participation/requests/${requestId}`, { method: 'DELETE' });
+}
+
+export async function leaveActivity(activityId) {
+    return await apiFetch(`/participation/activities/${activityId}/leave`, { method: 'DELETE' });
 }

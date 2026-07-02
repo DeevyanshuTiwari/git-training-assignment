@@ -81,6 +81,14 @@
     resize: vertical;
 }
 
+.profile-form input:disabled,
+.profile-form textarea:disabled {
+    background-color: #f1f5f9;
+    border-color: transparent;
+    color: var(--text-muted);
+    cursor: default;
+}
+
 .profile-form input:focus:not(:disabled),
 .profile-form textarea:focus {
     border-color: var(--primary);

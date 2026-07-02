@@ -28,9 +28,7 @@ class UserRegister(BaseModel):
         if v:
             clean_v = re.sub(r"[\s-]", "", v)
             if not re.fullmatch(r"(?:\+91|91)?[6-9]\d{9}", clean_v):
-                raise ValueError(
-                    "Enter a valid Indian mobile number."
-                )
+                raise ValueError("Enter a valid 10-digit Indian mobile number.")
         return v
 
 
@@ -49,6 +47,7 @@ class UserResponse(BaseModel):
 
 
 class UserUpdate(BaseModel):
+    name: str = None
     phone_number: str | None = None
     city: str | None = None
     bio: str | None = None

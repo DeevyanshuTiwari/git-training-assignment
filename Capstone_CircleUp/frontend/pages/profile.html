@@ -51,10 +51,7 @@
 <main class="dashboard-main">
     <!-- Topbar -->
     <header class="dashboard-topbar">
-        <div class="search-bar">
-            <i class="ph ph-magnifying-glass"></i>
-            <input type="text" placeholder="Search activities, categories...">
-        </div>
+        <div></div>
 
         <div class="user-profile-mini">
             <div class="notification-bell">
@@ -87,7 +84,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="prof-name">Full Name</label>
-                        <input type="text" id="prof-name" required placeholder="John Doe">
+                        <input type="text" id="prof-name" required placeholder="John Doe" readonly disabled class="read-only-input">
                     </div>
                     <div class="form-group">
                         <label for="prof-email">Email (Read Only)</label>
@@ -98,21 +95,23 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="prof-phone">Phone Number</label>
-                        <input type="tel" id="prof-phone" placeholder="+1 234 567 8900">
+                        <input type="tel" id="prof-phone" placeholder="+1 234 567 8900" readonly disabled class="read-only-input">
                     </div>
                     <div class="form-group">
                         <label for="prof-city">City</label>
-                        <input type="text" id="prof-city" placeholder="e.g. New York">
+                        <input type="text" id="prof-city" placeholder="e.g. New York" readonly disabled class="read-only-input">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="prof-bio">Short Bio</label>
-                    <textarea id="prof-bio" rows="4" placeholder="Tell the community a bit about yourself..."></textarea>
+                    <textarea id="prof-bio" rows="4" placeholder="Tell the community a bit about yourself..." readonly disabled class="read-only-input"></textarea>
                 </div>
 
-                <div class="profile-actions">
-                    <button type="submit" class="btn btn-primary" id="btn-save-profile">
+                <div class="profile-actions" style="gap: 12px;">
+                    <button type="button" class="btn btn-primary" id="btn-edit-profile">Edit Profile</button>
+                    <button type="button" class="btn btn-outline hidden" id="btn-cancel-edit">Cancel</button>
+                    <button type="submit" class="btn btn-primary hidden" id="btn-save-profile">
                         <span class="btn-text">Save Changes</span>
                         <div class="spinner hidden" style="width:16px; height:16px; border-width:2px;"></div>
                     </button>

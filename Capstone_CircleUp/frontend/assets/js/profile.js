@@ -29,7 +29,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const inputBio = document.getElementById('prof-bio');
 
     const profileAlert = document.getElementById('profile-alert');
+    const btnEditProfile = document.getElementById('btn-edit-profile');
+    const btnCancelEdit = document.getElementById('btn-cancel-edit');
     const btnSaveProfile = document.getElementById('btn-save-profile');
+
+    // State
+    let cachedProfile = null;
 
     // --- Helpers --- //
 
@@ -66,9 +71,41 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     const updateAvatars = (name) => {
-        const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 1);
         if (userAvatarMini) userAvatarMini.textContent = initials;
         if (profileAvatarLarge) profileAvatarLarge.textContent = initials;
+    };
+
+    const toggleEditMode = (isEditing) => {
+        const fields = [inputName, inputPhone, inputCity, inputBio];
+        fields.forEach(field => {
+            if (isEditing) {
+                field.removeAttribute('readonly');
+                field.removeAttribute('disabled');
+            } else {
+                field.setAttribute('readonly', 'true');
+                field.setAttribute('disabled', 'true');
+            }
+        });
+
+        if (isEditing) {
+            btnEditProfile.classList.add('hidden');
+            btnCancelEdit.classList.remove('hidden');
+            btnSaveProfile.classList.remove('hidden');
+            inputName.focus();
+        } else {
+            btnEditProfile.classList.remove('hidden');
+            btnCancelEdit.classList.add('hidden');
+            btnSaveProfile.classList.add('hidden');
+        }
+    };
+
+    const populateForm = (data) => {
+        inputName.value = data.name || '';
+        inputEmail.value = data.email || '';
+        inputPhone.value = data.phone_number || '';
+        inputCity.value = data.city || '';
+        inputBio.value = data.bio || '';
     };
 
     // --- Core Logic --- //
@@ -78,18 +115,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const profile = await getProfile();
             if (profile) {
+                cachedProfile = profile;
                 // Populate Headers
-                const name = profile.full_name || 'User';
+                const name = profile.name || 'User';
                 displayName.textContent = name;
                 displayEmail.textContent = profile.email;
                 updateAvatars(name);
 
                 // Populate Form
-                inputName.value = profile.full_name || '';
-                inputEmail.value = profile.email || '';
-                inputPhone.value = profile.phone_number || '';
-                inputCity.value = profile.city || '';
-                inputBio.value = profile.bio || ''; // If bio doesn't exist, this fails silently to ''
+                populateForm(profile);
             }
         } catch (error) {
             showAlert("Failed to load profile data. Please refresh.");
@@ -104,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         toggleLoading(true);
 
         const updatedData = {
-            full_name: inputName.value,
+            name: inputName.value,
             phone_number: inputPhone.value,
             city: inputCity.value,
             bio: inputBio.value
@@ -112,12 +146,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         try {
             const newProfile = await updateProfile(updatedData);
+            cachedProfile = newProfile; // Update cache
+
             showAlert("Profile updated successfully!", true);
 
             // Update Headers dynamically
-            const name = newProfile.full_name || inputName.value;
+            const name = newProfile.name || inputName.value;
             displayName.textContent = name;
             updateAvatars(name);
+
+            // Revert to Read-Only mode
+            toggleEditMode(false);
 
             // Auto hide success message after 3 seconds
             setTimeout(hideAlert, 3000);
@@ -128,9 +167,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
+    const handleCancelEdit = () => {
+        hideAlert();
+        if (cachedProfile) {
+            populateForm(cachedProfile);
+        }
+        toggleEditMode(false);
+    };
+
     // --- Initialization --- //
 
     if (btnLogout) btnLogout.addEventListener('click', logout);
+    if (btnEditProfile) btnEditProfile.addEventListener('click', () => toggleEditMode(true));
+    if (btnCancelEdit) btnCancelEdit.addEventListener('click', handleCancelEdit);
     if (profileForm) profileForm.addEventListener('submit', handleUpdateProfile);
 
     // Initial Load
