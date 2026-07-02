@@ -1,10 +1,37 @@
-from pydantic import BaseModel, EmailStr
+import re
+from typing import Optional
+from pydantic import BaseModel, EmailStr, Field, field_validator
 
 
 class UserRegister(BaseModel):
-    name: str
+    name: str = Field(..., min_length=2, max_length=50)
     email: EmailStr
-    password: str
+    password: str = Field(..., min_length=8)
+    phone_number: Optional[str] = None
+    city: Optional[str] = None
+    bio: Optional[str] = None
+
+    @field_validator('password')
+    @classmethod
+    def validate_password(cls, v):
+        if not re.search(r"[A-Z]", v):
+            raise ValueError("Password must contain at least one uppercase letter")
+        if not re.search(r"\d", v):
+            raise ValueError("Password must contain at least one number")
+        if not re.search(r"[!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?]", v):
+            raise ValueError("Password must contain at least one special character")
+        return v
+
+    @field_validator('phone_number')
+    @classmethod
+    def validate_phone(cls, v):
+        if v:
+            clean_v = re.sub(r"[\s-]", "", v)
+            if not re.fullmatch(r"(?:\+91|91)?[6-9]\d{9}", clean_v):
+                raise ValueError(
+                    "Enter a valid Indian mobile number."
+                )
+        return v
 
 
 class UserLogin(BaseModel):
@@ -19,6 +46,7 @@ class UserResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
 
 class UserUpdate(BaseModel):
     phone_number: str | None = None

@@ -155,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = document.getElementById('reg-email').value;
         const phone = document.getElementById('reg-phone').value;
         const city = document.getElementById('reg-city').value;
+        const bio = document.getElementById('reg-bio') ? document.getElementById('reg-bio').value : null;
         const password = document.getElementById('reg-password').value;
         const confirmPassword = document.getElementById('reg-confirm-password').value;
 
@@ -170,9 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
         if (!passwordRegex.test(password)) {
-            showError(registerError, "Password must be at least 8 characters long, contain one capital letter, one number, and one special character.");
+            showError(registerError, "Password must be at least 8 characters long, contain one capital letter and small letter, one number, and one special character.");
             return;
         }
 
@@ -181,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+       const phoneRegex = /^(?:\+91|91)?[6-9]\d{9}$/;
         if (phone && !phoneRegex.test(phone.replace(/[\s-]/g, ''))) {
             showError(registerError, "Please enter a valid phone number.");
             return;
@@ -192,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
             email: email,
             phone_number: phone,
             city: city,
+            bio: bio,
             password: password
         };
 

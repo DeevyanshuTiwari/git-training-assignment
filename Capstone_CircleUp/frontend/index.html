@@ -2,15 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CircleUp - Connect, Collaborate, Grow</title>
     <meta name="description" content="CircleUp is a modern platform to discover and join activities in your area.">
@@ -128,11 +119,11 @@
             <form id="login-form" class="auth-form">
                 <div id="login-error" class="form-error hidden"></div>
                 <div class="form-group">
-                    <label for="login-email">Email</label>
+                    <label for="login-email">Email <span style="color: rgb(255, 0, 0);">*</span></label>
                     <input type="email" id="login-email" required placeholder="you@example.com">
                 </div>
                 <div class="form-group">
-                    <label for="login-password">Password</label>
+                    <label for="login-password">Password <span style="color: rgb(255, 0, 0);">*</span></label>
                     <input type="password" id="login-password" required placeholder="••••••••">
                 </div>
                 <div class="form-options">
@@ -160,30 +151,41 @@
             <form id="register-form" class="auth-form">
                 <div id="register-error" class="form-error hidden"></div>
                 <div class="form-group">
-                    <label for="reg-name">Full Name</label>
+                    <label for="reg-name">Full Name <span style="color: rgb(255, 0, 0);">*</span></label>
                     <input type="text" id="reg-name" required placeholder="John Doe">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="reg-email">Email</label>
+                        <label for="reg-email">Email <span style="color: rgb(255, 0, 0);">*</span></label>
                         <input type="email" id="reg-email" required placeholder="you@example.com">
                     </div>
                     <div class="form-group">
-                        <label for="reg-phone">Phone Number</label>
-                        <input type="tel" id="reg-phone" placeholder="+1 234 567 8900">
+                        <label for="reg-phone">Phone Number <span style="color: #6b7280;">(optional)</span></label>
+                        <input type="tel" id="reg-phone" placeholder="+1 98 765 4321">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="reg-city">City</label>
-                    <input type="text" id="reg-city" placeholder="e.g. New York">
+                    <label for="reg-city">City <span style="color: #6b7280;">(optional)</span></label>
+                    <select id="reg-city">
+                        <option value="">Select a city</option>
+                        <option value="Bhopal">Bhopal</option>
+                        <option value="Indore">Indore</option>
+                        <option value="Raipur">Raipur</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reg-bio">Bio <span style="color: #6b7280;">(optional)</span></label>
+                    <textarea id="reg-bio" rows="2" placeholder="Tell us a little about yourself..."></textarea>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="reg-password">Password</label>
+                        <label for="reg-password">Password <span style="color: rgb(255, 0, 0);">*</span></label>
                         <input type="password" id="reg-password" required placeholder="••••••••">
                     </div>
                     <div class="form-group">
-                        <label for="reg-confirm-password">Confirm Password</label>
+                        <label for="reg-confirm-password">Confirm Password <span style="color: rgb(255, 0, 0);">*</span></label>
                         <input type="password" id="reg-confirm-password" required placeholder="••••••••">
                     </div>
                 </div>
