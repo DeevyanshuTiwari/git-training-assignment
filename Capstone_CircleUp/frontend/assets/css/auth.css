@@ -35,7 +35,7 @@
     transform: translateY(0) scale(1);
     transition: transform var(--transition-normal);
     max-height: 90vh;
-    overflow-y: hidden;
+    overflow-y: auto;
     border-radius: 20px;
 }
 

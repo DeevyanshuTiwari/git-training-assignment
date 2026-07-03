@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // FastAPI's OAuth2 response returns 'access_token'
             if (response && response.access_token) {
                 localStorage.setItem('circleup_jwt', response.access_token);
-                // Redirect to Dashboard (Step 10)
+                // Redirect to Dashboard
                 window.location.href = './pages/dashboard.html';
             } else {
                 throw new Error("Authentication failed. Invalid token.");
@@ -164,6 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
             showError(registerError, "Please fill in all required fields.");
             return;
         }
+
+         if (name.length < 3 || name.length > 16) {
+             showError(registerError, "Name must have atleast 3 character and less than 16 character.");
+             return;
+         }
 
         const emailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
         if (!emailRegex.test(email)) {
