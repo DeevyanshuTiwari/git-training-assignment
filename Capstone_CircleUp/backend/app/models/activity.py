@@ -10,6 +10,8 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.db.database import Base
+from app.enums.activity_status import ActivityStatus
+import sqlalchemy
 
 
 class Activity(Base):
@@ -57,8 +59,8 @@ class Activity(Base):
     )
 
     status = Column(
-        String,
-        default="OPEN"
+        sqlalchemy.Enum(ActivityStatus),
+        default=ActivityStatus.OPEN
     )
 
     created_by = Column(
