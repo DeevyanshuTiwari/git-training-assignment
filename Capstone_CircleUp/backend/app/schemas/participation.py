@@ -12,6 +12,7 @@ class ParticipationResponse(BaseModel):
     activity_id: int
     user_id: int
     status: str
+    user_name: str | None = None
 
     class Config:
         from_attributes = True
