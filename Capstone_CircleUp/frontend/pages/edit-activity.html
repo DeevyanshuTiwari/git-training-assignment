@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Activity - CircleUp</title>
+
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/activity.css">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body class="dashboard-body">
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar glass-panel">
+    <div class="sidebar-brand">
+        <i class="ph ph-circles-three-plus"></i>
+        <h2>CircleUp</h2>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+            <i class="ph ph-squares-four"></i> Dashboard
+        </a>
+        <a href="browse.html" class="nav-item">
+            <i class="ph ph-compass"></i> Browse Activities
+        </a>
+        <a href="my-activities.html" class="nav-item">
+            <i class="ph ph-calendar-check"></i> My Activities
+        </a>
+        <a href="create-activity.html" class="nav-item">
+            <i class="ph ph-plus-circle"></i> Create Activity
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="ph ph-user"></i> Profile
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <button id="btn-logout" class="btn btn-outline btn-full">
+            <i class="ph ph-sign-out"></i> Logout
+        </button>
+    </div>
+</aside>
+
+<!-- Main Content Area -->
+<main class="dashboard-main">
+    <!-- Edit Activity Content -->
+    <div class="dashboard-content">
+        <div style="max-width: 900px; margin: 0 auto; width: 100%;">
+            <div class="section-header">
+                <h2>Edit Activity</h2>
+                <p>Update the details of your activity below.</p>
+            </div>
+
+            <div class="activity-form-container glass-panel">
+                <div id="loader" class="loading-state">
+                    <div class="spinner-large"></div>
+                </div>
+
+                <form id="edit-activity-form" class="activity-form hidden">
+                    <div id="activity-alert" class="form-error hidden" style="width: 100%;"></div>
+
+                    <div class="form-group full-width">
+                        <label for="act-title">Activity Title</label>
+                        <input type="text" id="act-title" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="act-category">Category</label>
+                            <select id="act-category" required class="custom-select">
+                                <option value="" disabled>Select a category</option>
+                                <option value="Sports">Sports & Outdoors</option>
+                                <option value="Tech">Tech & Coding</option>
+                                <option value="Arts">Arts & Culture</option>
+                                <option value="Music">Music</option>
+                                <option value="Social">Social</option>
+                                <option value="Education">Education</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="act-location">Location / Venue</label>
+                            <select id="act-location" required class="custom-select">
+                                <option value="" disabled selected>Select a city</option>
+                                <option value="Bhopal">Bhopal</option>
+                                <option value="Indore">Indore</option>
+                                <option value="Raipur">Raipur</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Mumbai">Mumbai</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="act-date">Date</label>
+                            <input type="date" id="act-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="act-time">Time</label>
+                            <input type="time" id="act-time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="act-max">Max Participants</label>
+                            <input type="number" id="act-max" min="2" max="1000" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="act-description">Detailed Description</label>
+                        <textarea id="act-description" rows="5" required></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="btn-cancel">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="btn-save-activity">
+                            <span class="btn-text">Save Changes</span>
+                            <div class="spinner hidden" style="width:16px; height:16px; border-width:2px;"></div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Scripts -->
+<script type="module" src="../assets/js/edit-activity.js"></script>
+</body>
+</html>
