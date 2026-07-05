@@ -132,6 +132,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     // 2. Handle Update
+    const validateForm = (name, phone, bio) => {
+        if (name && name.trim().length < 3) {
+            return "Name must have at least 3 characters";
+        }
+        if (phone) {
+            const cleanPhone = phone.replace(/[\s-]/g, "");
+            if (!/^(?:\+91|91|0)?[6-9]\d{9}$/.test(cleanPhone)) {
+                return "Please enter a valid Indian phone number";
+            }
+        }
+        if (bio && bio.trim()) {
+            const words = bio.trim().split(/\s+/);
+            if (words.length < 3) {
+                return "Bio must have at least 3 words";
+            }
+        }
+        return null;
+    };
+
     const handleUpdateProfile = async (e) => {
         e.preventDefault();
         hideAlert();
@@ -143,6 +162,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             city: inputCity.value,
             bio: inputBio.value
         };
+
+        const validationError = validateForm(updatedData.name, updatedData.phone_number, updatedData.bio);
+        if (validationError) {
+            showAlert(validationError);
+            toggleLoading(false);
+            return;
+        }
 
         try {
             const newProfile = await updateProfile(updatedData);

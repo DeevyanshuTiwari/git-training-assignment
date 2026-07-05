@@ -165,10 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-         if (name.length < 3 || name.length > 16) {
-             showError(registerError, "Name must have atleast 3 character and less than 16 character.");
-             return;
-         }
+        if (name.length < 3 || name.length > 16) {
+            showError(registerError, "Name must have atleast 3 character and less than 16 character.");
+            return;
+        }
 
         const emailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
         if (!emailRegex.test(email)) {
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-       const phoneRegex = /^(?:\+91|91)?[6-9]\d{9}$/;
+        const phoneRegex = /^(?:\+91|91)?[6-9]\d{9}$/;
         if (phone && !phoneRegex.test(phone.replace(/[\s-]/g, ''))) {
             showError(registerError, "Please enter a valid phone number.");
             return;

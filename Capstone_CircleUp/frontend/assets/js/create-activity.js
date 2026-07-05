@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const profile = await getProfile();
         if (profile && userAvatarMini) {
             const name = profile.full_name || profile.email.split('@')[0];
-            userAvatarMini.textContent = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+            userAvatarMini.textContent = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 1);
         }
     } catch (e) {}
 
@@ -86,16 +86,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         const selectedDate = inputDate.value;
         const selectedTime = inputTime.value;
 
-        if (selectedDate === today) {
-            const now = new Date();
-            const currentHour = now.getHours();
-            const currentMin = now.getMinutes();
-            const [selHour, selMin] = selectedTime.split(':').map(Number);
+        const validateForm = (title, description, dateStr, timeStr, maxPart) => {
+            if (!title || title.trim().length < 3) return "Title must have at least 3 characters.";
+            if (!description || description.trim().split(/\s+/).length < 3) return "Description must have at least 3 words.";
+            if (parseInt(maxPart, 10) <= 0) return "Max participants must be at least 1.";
 
-            if (selHour < currentHour || (selHour === currentHour && selMin < currentMin)) {
-                showAlert("Activity time cannot be in the past.");
-                return;
+            const now = new Date();
+            const selectedDateTime = new Date(`${dateStr}T${timeStr}`);
+            if (selectedDateTime <= now) {
+                return "Activity time cannot be in the past.";
             }
+            return null;
+        };
+
+        const validationError = validateForm(inputTitle.value, inputDescription.value, selectedDate, selectedTime, inputMax.value);
+        if (validationError) {
+            showAlert(validationError);
+            return;
         }
 
         const payload = {

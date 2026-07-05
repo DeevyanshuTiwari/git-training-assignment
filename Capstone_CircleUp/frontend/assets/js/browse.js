@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const searchDate = document.getElementById('search-date');
     const searchCategory = document.getElementById('search-category');
     const btnSearch = document.getElementById('btn-search');
+    const btnClear = document.getElementById('btn-clear');
     const browseAlert = document.getElementById('browse-alert');
 
     // State
@@ -52,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             currentUserId = profile.id;
             if (userAvatarMini) {
                 const name = profile.name || profile.email.split('@')[0];
-                userAvatarMini.textContent = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+                userAvatarMini.textContent = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 1);
             }
         }
     } catch (e) {
@@ -120,7 +121,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const isFull = available <= 0;
 
             const isOwner = currentUserId === activity.created_by;
-            const editDisabled = isOwner ? '' : 'disabled title="Only the owner can edit this activity." style="opacity: 0.5; cursor: not-allowed;"';
+            const editStyles = isOwner ? 'flex: 1;' : 'flex: 1; opacity: 0.5; cursor: not-allowed; pointer-events: none;';
+            const editDisabledAttr = isOwner ? '' : 'disabled title="Only the owner can edit this activity."';
 
             // Using template literals to inject HTML dynamically
             html += `
@@ -143,7 +145,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     <div class="card-footer" style="display: flex; gap: 10px; margin-top: auto; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 16px;">
                         <a href="activity-details.html?id=${activity.id || activity._id}" class="btn btn-primary" style="flex: 1; text-align: center; text-decoration: none; padding: 10px;">View Details</a>
-                        <button class="btn btn-outline btn-edit" data-id="${activity.id || activity._id}" style="flex: 1;" ${editDisabled}>Edit</button>
+                        <button class="btn btn-outline btn-edit" data-id="${activity.id || activity._id}" style="${editStyles}" ${editDisabledAttr}>Edit</button>
                     </div>
                 </div>
             `;
@@ -160,7 +162,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const handleEditClick = (e) => {
         const activityId = e.currentTarget.getAttribute('data-id');
-        showAlert("API is ready in backend. UI logic is not implemented", true);
+        window.location.href = `edit-activity.html?id=${activityId}`;
     };
 
     const handleJoinClick = async (e) => {
@@ -195,9 +197,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         fetchAndRenderActivities(params);
     };
 
+    const handleClearFilters = () => {
+        searchName.value = '';
+        searchLocation.value = '';
+        searchDate.value = '';
+        searchCategory.value = '';
+        applyFilters();
+    };
+
     // --- Initialization --- //
 
     if (btnSearch) btnSearch.addEventListener('click', applyFilters);
+    if (btnClear) btnClear.addEventListener('click', handleClearFilters);
 
     // Optional: Also search on enter key in inputs
     [searchName, searchLocation, searchDate, searchCategory].forEach(el => {

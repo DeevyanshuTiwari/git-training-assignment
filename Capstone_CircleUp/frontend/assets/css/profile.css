@@ -115,4 +115,14 @@
     .profile-container {
         padding: var(--spacing-lg);
     }
+    .profile-avatar-large {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-md);
+    }
 }

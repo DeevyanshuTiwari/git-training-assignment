@@ -339,12 +339,18 @@
 @media (max-width: 768px) {
     .dashboard-body {
         flex-direction: column;
+        overflow: visible;
+        height: auto;
     }
     .sidebar {
         width: 100%;
         height: auto;
         position: relative;
         padding: var(--spacing-md);
+    }
+    .dashboard-main {
+        height: auto;
+        overflow-y: visible;
     }
     .sidebar-nav {
         flex-direction: row;
