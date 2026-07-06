@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CircleUp</title>
+
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body class="dashboard-body">
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar glass-panel">
+    <div class="sidebar-brand">
+        <i class="ph ph-circles-three-plus"></i>
+        <h2>CircleUp</h2>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item active">
+            <i class="ph ph-squares-four"></i> Dashboard
+        </a>
+        <a href="browse.html" class="nav-item">
+            <i class="ph ph-compass"></i> Browse Activities
+        </a>
+        <a href="my-activities.html" class="nav-item">
+            <i class="ph ph-calendar-check"></i> My Activities
+        </a>
+        <a href="create-activity.html" class="nav-item">
+            <i class="ph ph-plus-circle"></i> Create Activity
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="ph ph-user"></i> Profile
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <button id="btn-logout" class="btn btn-outline btn-full">
+            <i class="ph ph-sign-out"></i> Logout
+        </button>
+    </div>
+</aside>
+
+<!-- Main Content Area -->
+<main class="dashboard-main">
+    <!-- Dashboard Content -->
+    <div class="dashboard-content">
+        <div class="welcome-section">
+            <h1 id="welcome-message">Welcome back!</h1>
+            <p>Here is what's happening with your activities today.</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card glass-panel">
+                <div class="stat-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">
+                    <i class="ph ph-calendar-star"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Upcoming</h3>
+                    <p class="stat-value" id="stat-upcoming">0</p>
+                </div>
+            </div>
+
+            <div class="stat-card glass-panel">
+                <div class="stat-icon" style="background: rgba(236, 72, 153, 0.1); color: var(--secondary);">
+                    <i class="ph ph-users-three"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Joined</h3>
+                    <p class="stat-value" id="stat-joined">0</p>
+                </div>
+            </div>
+
+            <div class="stat-card glass-panel">
+                <div class="stat-icon" style="background: rgba(34, 197, 94, 0.1); color: #22c55e;">
+                    <i class="ph ph-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Created</h3>
+                    <p class="stat-value" id="stat-created">0</p>
+                </div>
+            </div>
+
+            <div class="stat-card glass-panel">
+                <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                    <i class="ph ph-clock-countdown"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Pending Requests</h3>
+                    <p class="stat-value" id="stat-pending">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Layout -->
+        <div class="dashboard-sections">
+            <!-- Upcoming Activities List -->
+            <section class="activity-section glass-panel">
+                <div class="section-header">
+                    <h2>Your Upcoming Activities</h2>
+                    <a href="my-activities.html" class="link-primary">View All</a>
+                </div>
+                <div class="activity-list" id="upcoming-list">
+                    <!-- Populated by JS -->
+                    <div class="empty-state">
+                        <i class="ph ph-calendar-blank"></i>
+                        <p>No upcoming activities. <a href="browse.html">Find something to do!</a></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="quick-actions glass-panel">
+                <div class="section-header">
+                    <h2>Quick Actions</h2>
+                </div>
+                <div class="action-grid">
+                    <a href="create-activity.html" class="action-card">
+                        <i class="ph ph-plus-circle"></i>
+                        <span>Create Activity</span>
+                    </a>
+                    <a href="browse.html" class="action-card">
+                        <i class="ph ph-compass"></i>
+                        <span>Explore</span>
+                    </a>
+                    <a href="profile.html" class="action-card">
+                        <i class="ph ph-user-gear"></i>
+                        <span>Edit Profile</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+<!-- Scripts -->
+<!-- Module import allows access to api.js -->
+<script type="module" src="../assets/js/dashboard.js"></script>
+</body>
+</html>

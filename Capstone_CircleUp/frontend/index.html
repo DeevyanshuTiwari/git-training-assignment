@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CircleUp - Connect, Collaborate, Grow</title>
+    <meta name="description" content="CircleUp is a modern platform to discover and join activities in your area.">
+
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/landing.css">
+    <link rel="stylesheet" href="./assets/css/auth.css">
+
+    <!-- Phosphor Icons (Lightweight, Modern Icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+<!-- Navigation Container -->
+<header id="main-nav" class="glass-panel">
+    <div class="container nav-wrapper">
+        <a href="#" class="brand-logo">
+            <i class="ph ph-circles-three-plus"></i>
+            CircleUp
+        </a>
+        <div class="auth-buttons">
+            <button id="btn-login" class="btn btn-outline">Login</button>
+            <button id="btn-register" class="btn btn-primary">Register</button>
+        </div>
+
+        <!-- Mobile Toggle -->
+        <button id="mobile-menu-btn" class="mobile-menu-btn">
+            <i class="ph ph-list"></i>
+        </button>
+    </div>
+</header>
+
+<!-- Main Landing Content -->
+<main>
+    <!-- Hero Section (Step 6) -->
+    <section id="hero" class="container">
+        <div class="hero-content">
+            <div class="hero-badge fade-in-up">
+                <span class="badge-icon">🚀</span>
+                <span>The #1 way to discover local activities</span>
+            </div>
+            <h1 class="hero-title fade-in-up" style="animation-delay: 0.1s;">
+                Connect, Collaborate, <br>
+                <span class="text-gradient">Grow Together.</span>
+            </h1>
+            <p class="hero-subtitle fade-in-up" style="animation-delay: 0.2s;">
+                Join CircleUp to discover exciting activities, meet like-minded people, and create unforgettable experiences in your community.
+            </p>
+            <div class="hero-actions fade-in-up" style="animation-delay: 0.3s;">
+                <!-- Uses onclick to trigger the same logic as the nav Register button -->
+                <button class="btn btn-primary btn-lg" onclick="document.getElementById('btn-register').click()">Get Started Free</button>
+                <a href="#features" class="btn btn-outline btn-lg">How it Works</a>
+            </div>
+
+            <div class="hero-social-proof fade-in-up" style="animation-delay: 0.4s;">
+                <div class="avatar-group">
+                    <div class="avatar" style="background-color: #fbcfe8;">😊</div>
+                    <div class="avatar" style="background-color: #bae6fd;">😎</div>
+                    <div class="avatar" style="background-color: #d9f99d;">🤩</div>
+                </div>
+                <p>Join <strong>10,000+</strong> active members</p>
+            </div>
+        </div>
+
+        <div class="hero-visual fade-in">
+            <!-- Abstract Decorative Background -->
+            <div class="visual-blob blob-1"></div>
+            <div class="visual-blob blob-2"></div>
+
+            <!-- Floating Glass Cards representing activities -->
+            <div class="hero-card card-1 glass-panel float-animation">
+                <div class="card-icon"><i class="ph ph-barbell"></i></div>
+                <div class="card-info">
+                    <h4>Morning Yoga</h4>
+                    <p>Today, 8:00 AM</p>
+                </div>
+            </div>
+
+            <div class="hero-card card-2 glass-panel float-animation-alt">
+                <div class="card-icon" style="color: var(--secondary);"><i class="ph ph-code"></i></div>
+                <div class="card-info">
+                    <h4>Tech Meetup</h4>
+                    <p>Tomorrow, 6:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- App Footer -->
+<footer id="main-footer">
+    <!-- Footer content will go here -->
+</footer>
+
+<!-- Global Modals -->
+<div id="auth-modal-overlay" class="overlay hidden">
+    <div class="modal-container glass-panel">
+        <button id="close-modal" class="close-btn"><i class="ph ph-x"></i></button>
+
+        <!-- Login View -->
+        <div id="login-view" class="auth-view">
+            <div class="auth-header">
+                <h2>Welcome Back</h2>
+                <p>Enter your details to access your account.</p>
+            </div>
+            <form id="login-form" class="auth-form">
+                <div id="login-error" class="form-error hidden"></div>
+                <div class="form-group">
+                    <label for="login-email">Email <span style="color: rgb(255, 0, 0);">*</span></label>
+                    <input type="email" id="login-email" required placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password <span style="color: rgb(255, 0, 0);">*</span></label>
+                    <input type="password" id="login-password" required placeholder="••••••••">
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me"> Remember Me
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full" id="btn-submit-login">
+                    <span class="btn-text">Login</span>
+                    <div class="spinner hidden"></div>
+                </button>
+            </form>
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="#" id="link-to-register">Register here</a></p>
+            </div>
+        </div>
+
+        <!-- Register View -->
+        <div id="register-view" class="auth-view hidden">
+            <div class="auth-header">
+                <h2>Create Account</h2>
+                <p>Join CircleUp and start exploring.</p>
+            </div>
+            <form id="register-form" class="auth-form">
+                <div id="register-error" class="form-error hidden"></div>
+                <div class="form-group">
+                    <label for="reg-name">Full Name <span style="color: rgb(255, 0, 0);">*</span></label>
+                    <input type="text" id="reg-name" required placeholder="John Doe">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="reg-email">Email <span style="color: rgb(255, 0, 0);">*</span></label>
+                        <input type="email" id="reg-email" required placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-phone">Phone Number <span style="color: #6b7280;">(optional)</span></label>
+                        <input type="tel" id="reg-phone" placeholder="+1 98 765 4321">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reg-city">City <span style="color: #6b7280;">(optional)</span></label>
+                    <select id="reg-city">
+                        <option value="">Select a city</option>
+                        <option value="Bhopal">Bhopal</option>
+                        <option value="Indore">Indore</option>
+                        <option value="Raipur">Raipur</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reg-bio">Bio <span style="color: #6b7280;">(optional)</span></label>
+                    <textarea id="reg-bio" rows="2" placeholder="Tell us a little about yourself..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="reg-password">Password <span style="color: rgb(255, 0, 0);">*</span></label>
+                        <input type="password" id="reg-password" required placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-confirm-password">Confirm Password <span style="color: rgb(255, 0, 0);">*</span></label>
+                        <input type="password" id="reg-confirm-password" required placeholder="••••••••">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full" id="btn-submit-register">
+                    <span class="btn-text">Register</span>
+                    <div class="spinner hidden"></div>
+                </button>
+            </form>
+            <div class="auth-footer">
+                <p>Already have an account? <a href="#" id="link-to-login">Login here</a></p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Scripts -->
+<script type="module" src="./assets/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - CircleUp</title>
+
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/profile.css">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body class="dashboard-body">
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar glass-panel">
+    <div class="sidebar-brand">
+        <i class="ph ph-circles-three-plus"></i>
+        <h2>CircleUp</h2>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+            <i class="ph ph-squares-four"></i> Dashboard
+        </a>
+        <a href="browse.html" class="nav-item">
+            <i class="ph ph-compass"></i> Browse Activities
+        </a>
+        <a href="my-activities.html" class="nav-item">
+            <i class="ph ph-calendar-check"></i> My Activities
+        </a>
+        <a href="create-activity.html" class="nav-item">
+            <i class="ph ph-plus-circle"></i> Create Activity
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <i class="ph ph-user"></i> Profile
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <button id="btn-logout" class="btn btn-outline btn-full">
+            <i class="ph ph-sign-out"></i> Logout
+        </button>
+    </div>
+</aside>
+
+<!-- Main Content Area -->
+<main class="dashboard-main">
+    <!-- Profile Content -->
+    <div class="dashboard-content">
+        <div class="section-header">
+            <h2>Account Settings</h2>
+            <p>Manage your profile information and preferences.</p>
+        </div>
+
+        <div class="profile-container glass-panel">
+            <div class="profile-header">
+                <div class="profile-avatar-large" id="profile-avatar-large">CU</div>
+                <div class="profile-title">
+                    <h3 id="display-name">Loading...</h3>
+                    <p id="display-email">loading@circleup.space</p>
+                </div>
+            </div>
+
+            <form id="profile-form" class="profile-form">
+                <div id="profile-alert" class="form-error hidden"></div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="prof-name">Full Name</label>
+                        <input type="text" id="prof-name" required placeholder="John Doe" readonly disabled class="read-only-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="prof-email">Email (Read Only)</label>
+                        <input type="email" id="prof-email" readonly disabled style="background: #e2e8f0; cursor: not-allowed;">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="prof-phone">Phone Number</label>
+                        <input type="tel" id="prof-phone" placeholder="+1 234 567 8900" readonly disabled class="read-only-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="prof-city">City</label>
+                        <select id="prof-city" disabled class="read-only-input">
+                            <option value="">Select a City</option>
+                            <option value="Bhopal">Bhopal</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Indore">Indore</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Pune">Pune</option>
+                            <option value="Raipur">Raipur</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="prof-bio">Short Bio</label>
+                    <textarea id="prof-bio" rows="4" placeholder="Tell the community a bit about yourself..." readonly disabled class="read-only-input"></textarea>
+                </div>
+
+                <div class="profile-actions" style="gap: 12px;">
+                    <button type="button" class="btn btn-primary" id="btn-edit-profile">Edit Profile</button>
+                    <button type="button" class="btn btn-outline hidden" id="btn-cancel-edit">Cancel</button>
+                    <button type="submit" class="btn btn-primary hidden" id="btn-save-profile">
+                        <span class="btn-text">Save Changes</span>
+                        <div class="spinner hidden" style="width:16px; height:16px; border-width:2px;"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<!-- Scripts -->
+<script type="module" src="../assets/js/profile.js"></script>
+</body>
+</html>

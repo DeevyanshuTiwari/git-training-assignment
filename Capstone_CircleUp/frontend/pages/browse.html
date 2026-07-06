@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Activities - CircleUp</title>
+
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/browse.css">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body class="dashboard-body">
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar glass-panel">
+    <div class="sidebar-brand">
+        <i class="ph ph-circles-three-plus"></i>
+        <h2>CircleUp</h2>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+            <i class="ph ph-squares-four"></i> Dashboard
+        </a>
+        <a href="browse.html" class="nav-item active">
+            <i class="ph ph-compass"></i> Browse Activities
+        </a>
+        <a href="my-activities.html" class="nav-item">
+            <i class="ph ph-calendar-check"></i> My Activities
+        </a>
+        <a href="create-activity.html" class="nav-item">
+            <i class="ph ph-plus-circle"></i> Create Activity
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="ph ph-user"></i> Profile
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <button id="btn-logout" class="btn btn-outline btn-full">
+            <i class="ph ph-sign-out"></i> Logout
+        </button>
+    </div>
+</aside>
+
+<!-- Main Content Area -->
+<main class="dashboard-main">
+    <!-- Browse Content -->
+    <div class="dashboard-content">
+        <div class="section-header browse-header">
+            <div>
+                <h2>Discover Activities</h2>
+                <p>Find exciting events happening around you.</p>
+            </div>
+        </div>
+
+        <!-- Advanced Search -->
+        <div class="advanced-search glass-panel">
+            <input type="text" id="search-name" placeholder="Activity Name...">
+            <input type="text" id="search-location" placeholder="Location...">
+            <input type="date" id="search-date">
+            <select id="search-category">
+                <option value="">All Categories</option>
+                <option value="Sports">Sports</option>
+                <option value="Tech">Tech</option>
+                <option value="Arts">Arts</option>
+                <option value="Music">Music</option>
+                <option value="Social">Social</option>
+                <option value="Education">Education</option>
+            </select>
+            <button id="btn-search" class="btn btn-primary">Search</button>
+        </div>
+
+        <!-- Global Alert -->
+        <div id="browse-alert" class="form-error hidden" style="margin-bottom: 20px;"></div>
+
+        <!-- Activities Grid Container -->
+        <div id="activities-grid" class="activities-grid">
+            <!-- Loader Placeholder -->
+            <div class="loading-state">
+                <div class="spinner-large"></div>
+                <p>Loading activities...</p>
+            </div>
+            <!-- Dynamic Content injected via JS -->
+        </div>
+    </div>
+</main>
+
+<!-- Scripts -->
+<script type="module" src="../assets/js/browse.js"></script>
+</body>
+</html>

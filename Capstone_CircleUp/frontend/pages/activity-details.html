@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Details - CircleUp</title>
+
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/activity.css">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body class="dashboard-body">
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar glass-panel">
+    <div class="sidebar-brand">
+        <i class="ph ph-circles-three-plus"></i>
+        <h2>CircleUp</h2>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+            <i class="ph ph-squares-four"></i> Dashboard
+        </a>
+        <a href="browse.html" class="nav-item active">
+            <i class="ph ph-compass"></i> Browse Activities
+        </a>
+        <a href="my-activities.html" class="nav-item">
+            <i class="ph ph-calendar-check"></i> My Activities
+        </a>
+        <a href="create-activity.html" class="nav-item">
+            <i class="ph ph-plus-circle"></i> Create Activity
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="ph ph-user"></i> Profile
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <button id="btn-logout" class="btn btn-outline btn-full">
+            <i class="ph ph-sign-out"></i> Logout
+        </button>
+    </div>
+</aside>
+
+<!-- Main Content Area -->
+<main class="dashboard-main">
+    <!-- Activity Details Content -->
+    <div class="dashboard-content hidden" id="details-container">
+        <div class="single-block-container glass-panel" style="max-width: 850px; margin: 0 auto; padding: var(--spacing-xxl); width: 100%;">
+            <a href="browse.html" class="btn btn-outline" style="margin-bottom: var(--spacing-lg); display: inline-flex; width: fit-content; gap: 8px;"><i class="ph ph-arrow-left"></i> Back to Browse</a>
+
+            <div class="details-header" style="border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: var(--spacing-lg); margin-bottom: var(--spacing-lg);">
+                <span class="category-badge" id="det-category">Category</span>
+                <h1 id="det-title">Activity Title</h1>
+                <div class="organizer-info">
+                    <div class="avatar organizer-avatar" id="org-avatar">Org</div>
+                    <span>Hosted by <strong id="org-name">Organizer Name</strong></span>
+                </div>
+            </div>
+
+            <div class="meta-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-xl); background: #f8fafc; padding: 20px; border-radius: var(--radius-md); border: 1px solid #e2e8f0;">
+                <div class="meta-row">
+                    <div class="meta-icon"><i class="ph ph-calendar"></i></div>
+                    <div class="meta-text">
+                        <strong>Date & Time</strong>
+                        <span id="det-datetime">Loading...</span>
+                    </div>
+                </div>
+                <div class="meta-row">
+                    <div class="meta-icon"><i class="ph ph-map-pin"></i></div>
+                    <div class="meta-text">
+                        <strong>Location</strong>
+                        <span id="det-location">Loading...</span>
+                    </div>
+                </div>
+                <div class="meta-row">
+                    <div class="meta-icon"><i class="ph ph-users"></i></div>
+                    <div class="meta-text">
+                        <strong>Availability</strong>
+                        <span id="det-seats">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-section" style="padding: 0; margin-bottom: var(--spacing-xl);">
+                <h3>About this Activity</h3>
+                <p id="det-description" class="det-desc" style="line-height: 1.6; color: var(--text-main);">Loading description...</p>
+            </div>
+
+            <div class="details-section" style="padding: 0; margin-bottom: var(--spacing-xl);">
+                <h3>Organizer Contact</h3>
+                <div id="contact-info-container">
+                    <p class="restricted-notice"><i class="ph ph-lock"></i> Contact information is hidden until your join request is approved.</p>
+                    <div id="contact-details" class="hidden" style="background: #f0fdf4; padding: 16px; border-radius: var(--radius-md); border: 1px solid #bbf7d0;">
+                        <p style="margin-bottom: 8px;"><strong>Email:</strong> <span id="org-email">...</span></p>
+                        <p><strong>Phone:</strong> <span id="org-phone">...</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(0,0,0,0.05); padding-top: var(--spacing-xl);">
+                <div id="details-alert" class="form-error hidden" style="margin-bottom:15px; width:100%;"></div>
+                <button class="btn btn-primary btn-full btn-lg" id="btn-join-details" style="font-size: 1.1rem; padding: 16px;">
+                    <span class="btn-text">Join Activity</span>
+                    <div class="spinner hidden" style="width:20px; height:20px; border-width:3px;"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loader -->
+    <div id="details-loader" class="loading-state" style="margin-top: 100px;">
+        <div class="spinner-large"></div>
+        <p>Loading activity details...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="details-error" class="no-results hidden" style="margin: 40px; border-color: #fca5a5; color: #ef4444;">
+        <i class="ph ph-warning-circle" style="color: #ef4444;"></i>
+        <h3>Activity Not Found</h3>
+        <p>This activity may have been deleted or does not exist.</p>
+        <a href="browse.html" class="btn btn-outline" style="margin-top:20px;">Go Back</a>
+    </div>
+</main>
+
+<!-- Scripts -->
+<script type="module" src="../assets/js/activity-details.js"></script>
+</body>
+</html>
