@@ -127,6 +127,12 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+            showError(loginError, "Incorrect password");
+            return;
+        }
+
         toggleLoading(btnSubmitLogin, true);
 
         try {

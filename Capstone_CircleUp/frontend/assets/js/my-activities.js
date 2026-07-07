@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="list-item">
                         <div class="item-main">
                             <div class="item-header">
-                                <h3>Activity ID: ${req.activity_id}</h3>
+                                <h3>${req.activity_title || 'Activity ' + req.activity_id}</h3>
                                 <span class="status-badge pending">Pending</span>
                             </div>
                             <div class="item-meta">

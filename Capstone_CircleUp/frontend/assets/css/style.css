@@ -135,3 +135,10 @@ p {
 .hidden {
     display: none !important;
 }
+
+/* Logout Button Hover override */
+#btn-logout:hover {
+    background: #ef4444;
+    color: #FFFFFF;
+    border-color: #ef4444;
+}
