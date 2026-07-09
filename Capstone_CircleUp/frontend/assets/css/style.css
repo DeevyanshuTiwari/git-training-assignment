@@ -142,3 +142,14 @@ p {
     color: #FFFFFF;
     border-color: #ef4444;
 }
+
+.btn-danger {
+    color: #ef4444;
+    border: 1px solid #ef4444;
+    background-color: transparent;
+}
+
+.btn-danger:hover {
+    background-color: #ef4444;
+    color: #FFFFFF;
+}

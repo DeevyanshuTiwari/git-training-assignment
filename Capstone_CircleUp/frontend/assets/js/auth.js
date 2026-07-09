@@ -82,8 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
             element.style.color = '#166534';
             element.style.borderColor = '#bbf7d0';
         } else {
-            element.removeAttribute('style'); // Revert to default red error styling
+            activityAlert.style.backgroundColor = '#fef2f2';
+            activityAlert.style.color = '#ef4444';
+            activityAlert.style.borderColor = '#fecaca';
         }
+        setTimeout(() => element.classList.add('hidden'), 4000);
     };
 
     const hideError = (element) => {

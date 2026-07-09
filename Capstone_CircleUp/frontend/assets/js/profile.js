@@ -46,8 +46,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             profileAlert.style.color = '#166534';
             profileAlert.style.borderColor = '#bbf7d0';
         } else {
-            profileAlert.removeAttribute('style'); // Default error styling
+            profileAlert.style.backgroundColor = '#fef2f2';
+            profileAlert.style.color = '#ef4444';
+            profileAlert.style.borderColor = '#fecaca';
         }
+        setTimeout(() => profileAlert.classList.add('hidden'), 3000);
     };
 
     const hideAlert = () => {

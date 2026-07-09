@@ -60,7 +60,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             alertBox.style.color = '#166534';
             alertBox.style.borderColor = '#bbf7d0';
         } else {
-            alertBox.removeAttribute('style');
+            alertBox.style.backgroundColor = '#fef2f2';
+            alertBox.style.color = '#ef4444';
+            alertBox.style.borderColor = '#fecaca';
         }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
