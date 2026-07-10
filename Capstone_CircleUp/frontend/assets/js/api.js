@@ -115,16 +115,20 @@ export async function updateProfile(profileData) {
     });
 }
 
-export async function getCreatedActivities() {
+export async function getUserCreatedActivities() {
     return await apiFetch('/users/me/activities/created', { method: 'GET' });
 }
 
-export async function getJoinedActivities() {
+export async function getUserJoinedActivities() {
     return await apiFetch('/users/me/activities/joined', { method: 'GET' });
 }
 
-export async function getPendingRequests() {
+export async function getUserPendingRequests() {
     return await apiFetch('/users/me/participation/pending', { method: 'GET' });
+}
+
+export async function getUserRejectedRequests() {
+    return await apiFetch('/users/me/participation/rejected', { method: 'GET' });
 }
 
 // ==========================================

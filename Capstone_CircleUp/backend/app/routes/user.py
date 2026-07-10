@@ -56,3 +56,11 @@ def get_pending_requests(
         current_user: User = Depends(get_current_user)
 ):
     return user_service.get_pending_requests(db, current_user)
+
+
+@router.get("/me/participation/rejected", response_model=List[ParticipationResponse])
+def get_rejected_requests(
+        db: Session = Depends(get_db),
+        current_user: User = Depends(get_current_user)
+):
+    return user_service.get_rejected_requests(db, current_user)
