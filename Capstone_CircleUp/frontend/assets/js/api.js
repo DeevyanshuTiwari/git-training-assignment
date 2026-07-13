@@ -71,6 +71,10 @@ export function isAuthenticated() {
     return !!localStorage.getItem('circleup_jwt');
 }
 
+// ==========================================
+// Login APIs
+// ==========================================
+
 export async function login(email, password) {
     // FastAPI's OAuth2PasswordRequestForm expects x-www-form-urlencoded
     const formData = new URLSearchParams();
@@ -86,12 +90,20 @@ export async function login(email, password) {
     });
 }
 
+// ==========================================
+// Register APIs
+// ==========================================
+
 export async function register(userData) {
     return await apiFetch('/auth/register', {
         method: 'POST',
         body: JSON.stringify(userData)
     });
 }
+
+// ==========================================
+// Logout APIs
+// ==========================================
 
 export function logout() {
     localStorage.removeItem('circleup_jwt');
