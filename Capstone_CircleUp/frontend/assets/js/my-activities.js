@@ -27,7 +27,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             globalAlert.style.color = '#166534';
             globalAlert.style.borderColor = '#bbf7d0';
         } else {
-            globalAlert.removeAttribute('style');
+            globalAlert.style.backgroundColor = '#fef2f2';
+            globalAlert.style.color = '#ef4444';
+            globalAlert.style.borderColor = '#fecaca';
         }
         setTimeout(() => globalAlert.classList.add('hidden'), 4000);
     };
@@ -92,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <div class="item-actions">
                             <button class="btn btn-outline manage-btn" onclick="openManageRequests(${act.id})">Requests</button>
                             <button class="btn btn-outline manage-btn" onclick="openParticipants(${act.id})">Participants</button>
-                            ${act.status !== 'CANCELLED' ? `<button class="btn btn-outline manage-btn" style="color: #991b1b; border-color: #991b1b;" onclick="handleCancelActivity(${act.id})">Cancel</button>` : ''}
+                            ${act.status !== 'CANCELLED' ? `<button class="btn btn-danger manage-btn" onclick="handleCancelActivity(${act.id})">Cancel</button>` : ''}
                         </div>
                     </div>
                 `;
@@ -137,7 +139,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         </div>
                         <div class="item-actions">
                             <button class="btn btn-outline manage-btn" onclick="openOrganizerContact(${act.id})">Organizer</button>
-                            <button class="btn btn-outline manage-btn" style="color: #991b1b; border-color: #991b1b;" onclick="handleLeaveActivity(${act.id})">Leave</button>
+                            <button class="btn btn-danger manage-btn" onclick="handleLeaveActivity(${act.id})">Leave</button>
                         </div>
                     </div>
                 `;
@@ -179,7 +181,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </div>
                         </div>
                         <div class="item-actions">
-                            <button class="btn btn-outline manage-btn" style="color: #991b1b; border-color: #991b1b;" onclick="handleWithdrawRequest(${req.id})">Withdraw</button>
+                            <button class="btn btn-danger manage-btn" onclick="handleWithdrawRequest(${req.id})">Withdraw</button>
                         </div>
                     </div>
                 `;
@@ -247,7 +249,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         </div>
                         <div class="item-actions">
                             <button class="btn btn-primary" onclick="handleApprove(${req.id}, ${activityId})">Approve</button>
-                            <button class="btn btn-outline" style="color:#991b1b; border-color:#991b1b;" onclick="handleReject(${req.id}, ${activityId})">Reject</button>
+                            <button class="btn btn-danger" onclick="handleReject(${req.id}, ${activityId})">Reject</button>
                         </div>
                     </div>
                 `;

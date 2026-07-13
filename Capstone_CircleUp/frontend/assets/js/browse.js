@@ -39,7 +39,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             browseAlert.style.color = '#166534';
             browseAlert.style.borderColor = '#bbf7d0';
         } else {
-            browseAlert.removeAttribute('style');
+            browseAlert.style.backgroundColor = '#fef2f2';
+            browseAlert.style.color = '#ef4444';
+            browseAlert.style.borderColor = '#fecaca';
         }
         setTimeout(() => {
             browseAlert.classList.add('hidden');

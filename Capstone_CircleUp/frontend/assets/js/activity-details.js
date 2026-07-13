@@ -64,7 +64,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             detailsAlert.style.color = '#166534';
             detailsAlert.style.borderColor = '#bbf7d0';
         } else {
-            detailsAlert.removeAttribute('style');
+            detailsAlert.style.backgroundColor = '#fef2f2';
+            detailsAlert.style.color = '#ef4444';
+            detailsAlert.style.borderColor = '#fecaca';
         }
     };
 

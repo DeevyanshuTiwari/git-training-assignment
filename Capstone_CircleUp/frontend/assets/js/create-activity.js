@@ -54,7 +54,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             activityAlert.style.color = '#166534';
             activityAlert.style.borderColor = '#bbf7d0';
         } else {
-            activityAlert.removeAttribute('style'); // Default error
+            activityAlert.style.backgroundColor = '#fef2f2';
+            activityAlert.style.color = '#ef4444';
+            activityAlert.style.borderColor = '#fecaca';
         }
 
         // Scroll to alert
