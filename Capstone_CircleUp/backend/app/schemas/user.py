@@ -27,7 +27,7 @@ class UserRegister(BaseModel):
     def validate_phone(cls, v):
         if v:
             clean_v = re.sub(r"[\s-]", "", v)
-            if not re.match(r"^\+?[1-9]\d{1,14}$", clean_v):
+            if not re.match(r"^(?:\+91|91)?[6-9]\d{9}$", clean_v):
                 raise ValueError("Invalid phone number format")
         return v
 

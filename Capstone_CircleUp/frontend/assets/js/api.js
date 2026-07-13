@@ -71,6 +71,10 @@ export function isAuthenticated() {
     return !!localStorage.getItem('circleup_jwt');
 }
 
+// ==========================================
+// Login APIs
+// ==========================================
+
 export async function login(email, password) {
     // FastAPI's OAuth2PasswordRequestForm expects x-www-form-urlencoded
     const formData = new URLSearchParams();
@@ -86,12 +90,20 @@ export async function login(email, password) {
     });
 }
 
+// ==========================================
+// Register APIs
+// ==========================================
+
 export async function register(userData) {
     return await apiFetch('/auth/register', {
         method: 'POST',
         body: JSON.stringify(userData)
     });
 }
+
+// ==========================================
+// Logout APIs
+// ==========================================
 
 export function logout() {
     localStorage.removeItem('circleup_jwt');
@@ -115,16 +127,20 @@ export async function updateProfile(profileData) {
     });
 }
 
-export async function getCreatedActivities() {
+export async function getUserCreatedActivities() {
     return await apiFetch('/users/me/activities/created', { method: 'GET' });
 }
 
-export async function getJoinedActivities() {
+export async function getUserJoinedActivities() {
     return await apiFetch('/users/me/activities/joined', { method: 'GET' });
 }
 
-export async function getPendingRequests() {
+export async function getUserPendingRequests() {
     return await apiFetch('/users/me/participation/pending', { method: 'GET' });
+}
+
+export async function getUserRejectedRequests() {
+    return await apiFetch('/users/me/participation/rejected', { method: 'GET' });
 }
 
 // ==========================================

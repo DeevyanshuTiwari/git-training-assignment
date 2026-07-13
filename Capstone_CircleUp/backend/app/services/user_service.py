@@ -53,3 +53,27 @@ def get_pending_requests(db: Session, current_user: User):
         }
         for r in requests
     ]
+
+
+def get_rejected_requests(db: Session, current_user: User):
+    requests = (
+        db.query(Participation, Activity.title.label("activity_title"))
+        .join(Activity, Participation.activity_id == Activity.id)
+        .filter(
+            Participation.user_id == current_user.id,
+            Participation.status == ParticipationStatus.REJECTED
+        )
+        .all()
+    )
+
+    return [
+        {
+            "id": r.Participation.id,
+            "activity_id": r.Participation.activity_id,
+            "user_id": r.Participation.user_id,
+            "status": r.Participation.status.value if hasattr(r.Participation.status,
+                                                              'value') else r.Participation.status,
+            "activity_title": r.activity_title
+        }
+        for r in requests
+    ]

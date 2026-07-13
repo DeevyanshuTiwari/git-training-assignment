@@ -82,11 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
             element.style.color = '#166534';
             element.style.borderColor = '#bbf7d0';
         } else {
-            activityAlert.style.backgroundColor = '#fef2f2';
-            activityAlert.style.color = '#ef4444';
-            activityAlert.style.borderColor = '#fecaca';
+            element.style.backgroundColor = '#fef2f2';
+            element.style.color = '#ef4444';
+            element.style.borderColor = '#fecaca';
         }
-        setTimeout(() => element.classList.add('hidden'), 4000);
+        setTimeout(() => element.classList.add('hidden'), 5000);
     };
 
     const hideError = (element) => {
@@ -240,4 +240,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Switch links
     if (linkToRegister) linkToRegister.addEventListener('click', (e) => { e.preventDefault(); showRegisterView(); });
     if (linkToLogin) linkToLogin.addEventListener('click', (e) => { e.preventDefault(); showLoginView(); });
+
+     // Password Toggle Logic
+    const toggleButtons = document.querySelectorAll('.toggle-password');
+        toggleButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.getAttribute('data-target');
+                const inputField = document.getElementById(targetId);
+                const icon = btn.querySelector('i');
+
+                if (inputField.type === 'password') {
+                    inputField.type = 'text';
+                    icon.classList.remove('ph-eye-slash');
+                    icon.classList.add('ph-eye');
+                } else {
+                    inputField.type = 'password';
+                    icon.classList.remove('ph-eye');
+                    icon.classList.add('ph-eye-slash');
+                }
+            });
+        });
 });

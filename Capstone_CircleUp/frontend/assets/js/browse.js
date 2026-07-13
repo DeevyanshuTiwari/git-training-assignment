@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (btnSearch) btnSearch.addEventListener('click', applyFilters);
     if (btnClear) btnClear.addEventListener('click', handleClearFilters);
 
-    // Optional: Also search on enter key in inputs
+    // Also search on enter key in inputs
     [searchName, searchLocation, searchDate, searchCategory].forEach(el => {
         if (el) {
             el.addEventListener('keypress', (e) => {

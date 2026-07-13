@@ -1,6 +1,6 @@
 import {
     isAuthenticated, logout, getProfile,
-    getCreatedActivities, getJoinedActivities, getPendingRequests,
+    getUserCreatedActivities, getUserJoinedActivities, getUserPendingRequests, getUserRejectedRequests,
     cancelActivity, getOrganizerContact, getActivityParticipants,
     getActivityRequests, approveParticipant, rejectParticipant,
     withdrawRequest, leaveActivity
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         loader.classList.remove('hidden');
         list.innerHTML = '';
         try {
-            const activities = await getCreatedActivities();
+            const activities = await getUserCreatedActivities();
             loader.classList.add('hidden');
             if (activities.length === 0) {
                 list.innerHTML = `
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         loader.classList.remove('hidden');
         list.innerHTML = '';
         try {
-            const activities = await getJoinedActivities();
+            const activities = await getUserJoinedActivities();
             loader.classList.add('hidden');
             if (activities.length === 0) {
                 list.innerHTML = `
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         loader.classList.remove('hidden');
         list.innerHTML = '';
         try {
-            const requests = await getPendingRequests();
+            const requests = await getUserPendingRequests();
             loader.classList.add('hidden');
             if (requests.length === 0) {
                 list.innerHTML = `
@@ -190,6 +190,39 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (e) {
             loader.classList.add('hidden');
             showAlert("Error loading pending requests.");
+        }
+    };
+
+    const loadRejected = async () => {
+        const loader = document.getElementById('rejected-loader');
+        const list = document.getElementById('rejected-list');
+        if (!loader || !list) return;
+        loader.classList.remove('hidden');
+        list.innerHTML = '';
+        try {
+            const requests = await getUserRejectedRequests();
+            loader.classList.add('hidden');
+            if (requests.length === 0) {
+                list.innerHTML = '<p style="text-align:center; padding:20px;">No rejected requests.</p>';
+                return;
+            }
+            let html = '';
+            requests.forEach(req => {
+                html += `
+                    <div class="list-item">
+                        <div class="item-main">
+                            <div class="item-header">
+                                <h3>${req.activity_title || 'Activity ' + req.activity_id}</h3>
+                                <span class="status-badge rejected">Rejected</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            list.innerHTML = html;
+        } catch (e) {
+            loader.classList.add('hidden');
+            showAlert("Error loading rejected requests.");
         }
     };
 
@@ -323,5 +356,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
-    await Promise.all([loadHosting(), loadJoined(), loadPending()]);
+    await Promise.all([loadHosting(), loadJoined(), loadPending(), loadRejected()]);
 });

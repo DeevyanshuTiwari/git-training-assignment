@@ -38,8 +38,6 @@ def get_activity_requests(db: Session, current_user: User, activity_id: int):
     if activity.created_by != current_user.id:
         raise HTTPException(status_code=403, detail="You are not allowed to view these requests.")
 
-    # We need user details as well, so we do a join in service layer logic or rewrite repo
-    # To keep it simple and clean, we'll fetch from db here or just map it
     requests = db.query(Participation, User.name.label("user_name")) \
         .join(User, Participation.user_id == User.id) \
         .filter(Participation.activity_id == activity_id) \

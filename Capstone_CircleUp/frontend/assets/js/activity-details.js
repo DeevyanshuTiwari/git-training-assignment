@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const isFull = available <= 0;
 
         if (isFull) {
-            elSeats.innerHTML = `<span style="color:#ef4444; font-weight:600;">Full (Waitlist available)</span>`;
+            elSeats.innerHTML = `<span style="color:#ef4444; font-weight:600;">Full</span>`;
             const textSpan = btnJoin.querySelector('.btn-text');
             textSpan.textContent = 'Join Waitlist';
             btnJoin.classList.replace('btn-primary', 'btn-outline');

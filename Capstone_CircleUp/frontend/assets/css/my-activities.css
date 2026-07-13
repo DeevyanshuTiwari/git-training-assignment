@@ -8,6 +8,12 @@
 .tabs {
     display: flex;
     gap: var(--spacing-xl);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+}
+.tabs::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
 }
 
 .tab-btn {
@@ -20,6 +26,7 @@
     cursor: pointer;
     position: relative;
     transition: color var(--transition-fast);
+    white-space: nowrap;
 }
 
 .tab-btn:hover {
@@ -79,6 +86,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-wrap: wrap;
 }
 
 .status-badge {
@@ -177,6 +185,9 @@
         padding-left: 0;
         padding-top: var(--spacing-md);
         align-items: flex-start;
+    }
+    .tabs {
+        gap: var(--spacing-md);
     }
 }
 

@@ -3,7 +3,7 @@
  * Protected route logic, profile fetching, and data population.
  */
 
-import { isAuthenticated, logout, getProfile, getCreatedActivities, getJoinedActivities, getPendingRequests } from './api.js';
+import { isAuthenticated, logout, getProfile, getUserCreatedActivities, getUserJoinedActivities, getUserPendingRequests } from './api.js';
 
 // Route Protection: Redirect if not logged in
 if (!isAuthenticated()) {
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Populate Avatar initials
             if (profile.name) {
-                const initials = profile.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0,1);
+                const initials = profile.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0,2);
                 userAvatarMini.textContent = initials;
             } else {
                 userAvatarMini.textContent = name.substring(0,2).toUpperCase();
@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Load Stats & Upcoming Activities
     try {
         const [created, joined, pending] = await Promise.all([
-            getCreatedActivities(),
-            getJoinedActivities(),
-            getPendingRequests()
+            getUserCreatedActivities(),
+            getUserJoinedActivities(),
+            getUserPendingRequests()
         ]);
 
         const today = new Date();
@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const upcomingActivities = Array.from(uniqueMap.values()).filter(act => {
             if (!act.activity_date) return false;
+            if (act.status === 'CANCELLED') return false; // Exclude canceled activities
             const actDate = new Date(act.activity_date);
             return actDate >= today;
         });

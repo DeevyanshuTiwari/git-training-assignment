@@ -30,3 +30,8 @@ def test_get_user_participation(client, user_headers):
 def test_get_user_pending_requests(client, user_headers):
     response = client.get("/users/me/participation/pending", headers=user_headers)
     assert response.status_code == 200
+
+
+def test_get_user_rejected_requests(client, user_headers):
+    response = client.get("/users/me/participation/rejected", headers=user_headers)
+    assert response.status_code == 200
