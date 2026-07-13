@@ -9,8 +9,9 @@ from sqlalchemy import (
 )
 
 from sqlalchemy.orm import relationship
-
 from app.db.database import Base
+from app.enums.participation_status import ParticipationStatus
+import sqlalchemy
 
 
 class Participation(Base):
@@ -35,8 +36,8 @@ class Participation(Base):
     )
 
     status = Column(
-        String,
-        default="PENDING"
+        sqlalchemy.Enum(ParticipationStatus),
+        default=ParticipationStatus.PENDING
     )
 
     requested_at = Column(

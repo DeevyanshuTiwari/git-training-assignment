@@ -1,5 +1,5 @@
 from datetime import date, time, datetime
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class ActivityCreate(BaseModel):
@@ -12,6 +12,20 @@ class ActivityCreate(BaseModel):
     activity_time: time
 
     max_participants: int = Field(gt=0)
+
+    @field_validator('title')
+    @classmethod
+    def validate_title(cls, v):
+        if len(v.strip()) < 3:
+            raise ValueError("Title must have at least 3 characters")
+        return v
+
+    @field_validator('description')
+    @classmethod
+    def validate_description(cls, v):
+        if len(v.strip().split()) < 3:
+            raise ValueError("Description must have at least 3 words")
+        return v
 
 
 class ActivityUpdate(BaseModel):
@@ -28,6 +42,21 @@ class ActivityUpdate(BaseModel):
         gt=0
     )
 
+    @field_validator('title')
+    @classmethod
+    def validate_title(cls, v):
+        if v is not None and len(v.strip()) < 3:
+            raise ValueError("Title must have at least 3 characters")
+        return v
+
+    @field_validator('description')
+    @classmethod
+    def validate_description(cls, v):
+        if v:
+            if len(v.strip().split()) < 3:
+                raise ValueError("Description must have at least 3 words")
+        return v
+
 
 class ActivityResponse(BaseModel):
     id: int
@@ -41,10 +70,10 @@ class ActivityResponse(BaseModel):
     activity_time: time
 
     max_participants: int
-
+    participants_count: int | None = 0
     status: str
-
     created_by: int
+    organizer_name: str | None = None
 
     created_at: datetime
 
